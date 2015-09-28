@@ -20,7 +20,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.auth', 'admin.permiss
         Route::resource('roles', 'RolesController');
         Route::resource('permissions', 'PermissionsController');
         Route::resource('admins', 'AdminsController');
-        Route::resource('navs', 'NavsController');
         Route::post('roles/assign-permission', ['as' => 'admin.roles.assign-permission', 'uses' => 'RolesController@assignPermission']);
         Route::post('admins/assign-role', ['as' => 'admin.roles.assign-role', 'uses' => 'AdminsController@assignRole']);
     });
