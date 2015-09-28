@@ -216,8 +216,7 @@ class ForoneHtmlServiceProvider extends ServiceProvider
                     $html .= '</tr>';
                 }
             }
-            $html .= '<tbody>';
-
+            $html .= '</tbody>';
             $html .= '<tfoot>';
             $html .= ' <tr>';
             $html .= '    <td colspan="10" class="text-center">';
@@ -225,7 +224,7 @@ class ForoneHtmlServiceProvider extends ServiceProvider
             $html .= '  </td>';
             $html .= ' </tr>';
             $html .= '</tfoot>';
-            $html .= '</table></div></div>';
+            $html .= '</table></div>';
             $js = "<script>init.push(function(){
                    $('.fancybox').fancybox({
                     openEffect  : 'none',
@@ -287,13 +286,21 @@ class ForoneHtmlServiceProvider extends ServiceProvider
             $html .= '<div class="panel-heading">' . $title . '</div>';
             $html .= '<div class="panel-body b-b b-light">';
             if (array_key_exists('new', $data)) {
-                $html .= '<a href="' . $this->url->current() . '/create" class="btn btn-primary">&#43; 新增</a>';
+                $html .= '<a href="' . $this->url->current() . '/create" class="btn btn-primary">&#43; 新增</a>&nbsp;&nbsp;&nbsp;';
+            }
+            if (array_key_exists('import', $data)) {
+               // $html .='<div class="col-sm-2">';
+                $html .= '<a href="' . $this->url->current() . '/import" class="btn btn-primary">更新导入</a>&nbsp;&nbsp;&nbsp;';
+               // $html .='</div>';
+            }
+            if (array_key_exists('export', $data)) {
+                $html .= '<a href="' . $this->url->current() . '/export" class="btn btn-primary">数据导出</a>';
             }
             if (array_key_exists('filters', $data)) {
 
                 $result = '';
                 foreach ($data['filters'] as $key => $value) {
-                    $result .= '<div class="col-sm-2" style="padding-left: 0px;width: 8%">
+                    $result .= '<div class="col-sm-2" style="padding-left: 0px">
                         <select class="form-control" name="' . $key . '">';
                     foreach ($value as $item) {
                         $value = is_array($item) ? $item['value'] : $item;
@@ -415,7 +422,7 @@ class ForoneHtmlServiceProvider extends ServiceProvider
 
             if (array_key_exists('search', $data)) {
                 $search = is_bool($data['search']) ? '请输入您想检索的信息' : $data['search'];
-                $html .= '<div class="col-md-3" style="padding-left:0px; float: right;width: 17%">
+                $html .= '<div class="col-md-4" style="padding-left:0px; float: right">
                                 <input id="keywordsInput" type="text" class="form-control input" name="keywords" value="' . Input::get('keywords') . '" placeholder="' . $search . '"  />
                             </div>';
                 $js = "<script>init.push(function(){
